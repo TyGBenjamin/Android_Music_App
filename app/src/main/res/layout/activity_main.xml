@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+<!--    <com.airbnb.lottie.LottieAnimationView-->
+<!--        android:id="@+id/animationview"-->
+<!--        android:layout_width="196dp"-->
+<!--        android:layout_height="186dp"-->
+<!--        app:lottie_autoPlay="true"-->
+<!--        tools:layout_editor_absoluteX="96dp"-->
+<!--        tools:layout_editor_absoluteY="94dp"-->
+<!--        app:lottie_rawRes="@raw/music_loader"-->
+<!--        tools:ignore="MissingConstraints" />-->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
