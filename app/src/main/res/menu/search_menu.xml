@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/mi_country"
+        android:title="@string/country" />
+    <item android:id="@+id/mi_hip_hop"
+        android:title="@string/hip_hop" />
+    <item android:id="@+id/mi_edm"
+        android:title="@string/edm" />
+    <item android:id="@+id/mi_random"
+        android:title="@string/random" />
+    <item android:id="@+id/mi_jazz"
+        android:title="@string/jazz" />
+    <item android:id="@+id/mi_metal"
+        android:title="@string/metal" />
+    <item android:id="@+id/mi_reggae"
+        android:title="@string/reggae" />
+    <item android:id="@+id/mi_synthwave"
+        android:title="@string/synthwave" />
+</menu>

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MusicPlayer</string>
+    <string name="country">Country</string>
+    <string name="hip_hop">Hip Hop</string>
+    <string name="edm">EDM</string>
+    <string name="random">Random</string>
+    <string name="jazz">Jazz</string>
+    <string name="metal">Metal</string>
+    <string name="reggae">Reggae</string>
+    <string name="synthwave">Synthwave</string>
 </resources>
