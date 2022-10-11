@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/viewPager2">
+
+
+
+<!--    <fragment-->
+<!--        android:id="@+id/onboarding"-->
+<!--        android:name="com.alecbrando.musicplayer.presentation.screens.Onboarding"-->
+<!--        android:label="fragment_onboarding"-->
+<!--        tools:layout="@layout/fragment_onboarding" />-->
+<!--    <fragment-->
+<!--        android:id="@+id/secondOnboard"-->
+<!--        android:name="com.alecbrando.musicplayer.presentation.screens.onboarding.SecondOnboard"-->
+<!--        android:label="fragment_second_onboard"-->
+<!--        tools:layout="@layout/fragment_second_onboard" />-->
+    <fragment
+        android:id="@+id/viewPager2"
+        android:name="com.alecbrando.musicplayer.presentation.screens.onboarding.ViewPager"
+        android:label="fragment_view_pager2"
+        tools:layout="@layout/fragment_view_pager2" >
+        <action
+            android:id="@+id/action_viewPager2_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.alecbrando.musicplayer.presentation.screens.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+
+</navigation>
