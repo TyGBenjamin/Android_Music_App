@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.alecbrando.musicplayer.adapters.GridViewAdapter
 import com.alecbrando.musicplayer.adapters.ListViewAdapter
 import com.alecbrando.musicplayer.databinding.FragmentDashboardBinding
 import com.alecbrando.musicplayer.util.Constants.TAG
@@ -24,6 +25,8 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding: FragmentDashboardBinding get() = _binding!!
     private val viewModel by viewModels<ListViewModel>()
+    private val viewModelGrid by viewModels<GridViewModel>()
+    private val gridViewAdapter by lazy { GridViewAdapter() }
     private val listViewAdapter by lazy { ListViewAdapter() }
 
     override fun onCreateView(
@@ -60,7 +63,18 @@ class DashboardFragment : Fragment() {
                     }
                 },
                 launch {
-                    // TODO: build out second adapter
+                    viewModelGrid.songList.collectLatest { gridState ->
+                        when (gridState) {
+                            is Resource.Error -> Log.d(TAG, "error: ${gridState.message}")
+                            is Resource.Loading -> Log.d("LOADING", "loading...")
+                            is Resource.Success -> {
+                                Log.d(TAG, "success: ${gridState.data.songs}")
+                                rvView.adapter = gridViewAdapter.apply {
+                                    addItems(gridState.data.songs)
+                                }
+                            }
+                        }
+                    }
                 }
             ).joinAll()
 

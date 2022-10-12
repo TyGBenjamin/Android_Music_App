@@ -22,4 +22,18 @@ class RepositoryImpl @Inject constructor(private var apiInstance: ApiService) : 
             Resource.Error(e.message.toString())
         }
     }
+
+    override suspend fun getGenre(genre: String): Resource<SongList> = withContext(Dispatchers.IO) {
+        return@withContext try {
+            val res = apiInstance.getGenre(genre)
+            if (res.isSuccessful && res.body() != null) {
+                Resource.Success(res.body()!!)
+            } else {
+                Resource.Error("An Error Occurred")
+            }
+
+        } catch (e: Exception) {
+            Resource.Error(e.message.toString())
+        }
+    }
 }

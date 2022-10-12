@@ -6,13 +6,14 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiService {
     @GET("music/songs")
     suspend fun getSongs(): Response<SongList>
 
-//    @GET("anime/{id}")
-//    suspend fun getAnimeById(@Path("id") id: String): Response<AnimeWrapper>
+    @GET("music/genre")
+    suspend fun getGenre(@Query("search") genre: String): Response<SongList>
 
     companion object {
         val apiInstance =
