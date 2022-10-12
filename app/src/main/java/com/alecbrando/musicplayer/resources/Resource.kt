@@ -1,7 +1,8 @@
 package com.alecbrando.musicplayer.resources
 
-sealed class Resource<T>(data: T? = null, message: String? = null, ){
-    data class Success<T>(val data: T) : Resource<T>(data, null)
-    class Loading<T>(): Resource<T>()
-    data class Error<T>(val message: String): Resource<T>(message = message)
+sealed class Resource<out T>{
+    data class Success<T>(val data: T) : Resource<T>()
+    object Loading: Resource<Nothing>()
+    data class Error(val message: String): Resource<Nothing>()
+    object Idle : Resource<Nothing>()
 }

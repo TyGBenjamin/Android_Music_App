@@ -10,7 +10,6 @@ import com.alecbrando.musicplayer.domains.models.Songs
 import com.alecbrando.musicplayer.domains.models.SongsWrapper
 import com.alecbrando.musicplayer.domains.repository.Repository
 import com.alecbrando.musicplayer.domains.usecases.GetAllSongsUseCase
-import com.alecbrando.musicplayer.domains.usecases.GetSongsByGenreUseCase
 import com.alecbrando.musicplayer.resources.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,23 +21,20 @@ import javax.inject.Inject
  * @author Ngu Nguyen 10/10/2022
  */
 @HiltViewModel
-class DashboardViewModel @Inject constructor(
-    private val getAllSongsUseCase: GetAllSongsUseCase,
-    private  val getSongsByGenreUseCase: GetSongsByGenreUseCase
+class DashboardViewModelBottom @Inject constructor(
+    private val getAllSongsUseCase: GetAllSongsUseCase
 ): ViewModel() {
     private var _songList : MutableStateFlow<Resource<SongsWrapper>> = MutableStateFlow(Resource.Idle)
     val songList = _songList.asStateFlow()
 
     init{
-        getSongByGenre("random")
+        getAllSongs()
     }
 
-
-
-
-    private fun getSongByGenre(genre: String){
+    private fun getAllSongs() {
         viewModelScope.launch {
-            _songList.value = getSongsByGenreUseCase(genre)
+            _songList.value = getAllSongsUseCase()
         }
+
     }
 }

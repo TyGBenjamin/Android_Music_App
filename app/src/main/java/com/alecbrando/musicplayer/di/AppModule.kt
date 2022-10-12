@@ -3,7 +3,7 @@ package com.alecbrando.musicplayer.di
 import com.alecbrando.musicplayer.data.repository.RepositoryImpl
 import com.alecbrando.musicplayer.data.service.ApiService
 import com.alecbrando.musicplayer.domains.repository.Repository
-import com.alecbrando.musicplayer.utils.SingUrl.BASE_URL
+import com.alecbrando.musicplayer.utils.SongsUrl.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
