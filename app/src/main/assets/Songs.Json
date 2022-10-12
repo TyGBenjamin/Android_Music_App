@@ -1,0 +1,89 @@
+{
+  "success": true,
+  "message": "ok",
+  "previousPage": null,
+  "nextPage": null,
+  "songs": [
+    {
+      "id": 1,
+      "name": "Come Back As a Country Boy",
+      "artist": "Blake Shelton",
+      "genre": "Country",
+      "albumPicture": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/blake_shelton_come_back_as_country_boy/blake_shelton_art.jpeg",
+      "mp3": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/blake_shelton_come_back_as_country_boy/Come_Back_As_A_Country_Boy.mp3"
+    },
+    {
+      "id": 2,
+      "name": "God's Country",
+      "artist": "Blake Shelton",
+      "genre": "Country",
+      "albumPicture": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/blake_shelton_gods_country/blake_shelton_art.jpeg",
+      "mp3": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/blake_shelton_gods_country/Gods_Country.mp3"
+    },
+    {
+      "id": 3,
+      "name": "Sangria",
+      "artist": "Blake Shelton",
+      "genre": "Country",
+      "albumPicture": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/blake_shelton_gods_country/blake_shelton_art.jpeg",
+      "mp3": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/blake_shelton_gods_country/Gods_Country.mp3"
+    },
+    {
+      "id": 4,
+      "name": "Die a happy man",
+      "artist": "Thomas Rhett",
+      "genre": "Country",
+      "albumPicture": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/thomas_rhett_die_a_happy_man/Thomas_Rhett_art.jpg",
+      "mp3": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/thomas_rhett_die_a_happy_man/Die_A_Happy_Man.mp3"
+    },
+    {
+      "id": 5,
+      "name": "Marry me",
+      "artist": "Thomas Rhett",
+      "genre": "Country",
+      "albumPicture": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/thomas_rhett_marry_me/Thomas_Rhett_art.jpg",
+      "mp3": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/thomas_rhett_marry_me/marry_me.mp3"
+    },
+    {
+      "id": 6,
+      "name": "T Shit",
+      "artist": "Thomas Rhett",
+      "genre": "Country",
+      "albumPicture": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/thomas_rhett_t_shirt/Thomas_Rhett_art.jpg",
+      "mp3": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/thomas_rhett_t_shirt/t_shirt.mp3"
+    },
+    {
+      "id": 7,
+      "name": "Pink Tractor",
+      "artist": "Tim Hawkins",
+      "genre": "Country",
+      "albumPicture": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/tim_hawkins_pretty_pink_tractor/tim_hawkins_art.jpeg",
+      "mp3": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/tim_hawkins_pretty_pink_tractor/pretty_pink_tractor.mp3"
+    },
+    {
+      "id": 73,
+      "name": "Hurt",
+      "artist": "Johnny Cash",
+      "genre": "Country",
+      "albumPicture": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/johnny_hurt/johnny_art.jpeg",
+      "mp3": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/johnny_hurt/Johnny_Cash_-_Hurt_Official_Music_(getmp3.pro).mp3"
+    },
+    {
+      "id": 74,
+      "name": "Folsom Prison Blues",
+      "artist": "Johnny Cash",
+      "genre": "Country",
+      "albumPicture": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/johnny_folsom/johnny_art.jpeg",
+      "mp3": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/johnny_hurt/Johnny_Cash_-_Folsom_Prison_Blues__(getmp3.pro).mp3"
+    },
+    {
+      "id": 75,
+      "name": "Walk The Line",
+      "artist": "Johnny Cash",
+      "genre": "Country",
+      "albumPicture": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/johnny_walk/johnny_art.jpeg",
+      "mp3": "https://music-api-summer-2022.s3.amazonaws.com/songs/country/johnny_walk/I_Walk_the_Line_(getmp3.pro).mp3"
+    }
+  ],
+  "lastUpdated": 1665588288336
+}

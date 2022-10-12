@@ -1,5 +1,5 @@
 package com.alecbrando.musicplayer.domain.model
 
-data class SongListWrapper(
+data class SongList(
     var songs : List<Song>
 )

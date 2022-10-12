@@ -34,5 +34,13 @@
         android:text="@string/first_fragment_text"
         android:gravity="center"/>
 
+<!--    <me.relex.circleindicator.CircleIndicator3-->
+<!--        android:id="@+id/circle_center"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="90dp"-->
+<!--        android:background="@color/teal_700"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tv_first"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
