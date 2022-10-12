@@ -35,6 +35,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rv_view"
         app:layout_constraintVertical_bias="0.778"
-        tools:itemCount="4"
+        tools:itemCount="5"
         tools:listitem="@layout/single_song" />
 </androidx.constraintlayout.widget.ConstraintLayout>
