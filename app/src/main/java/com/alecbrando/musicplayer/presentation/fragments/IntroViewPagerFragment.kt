@@ -16,7 +16,7 @@ class IntroViewPagerFragment: Fragment() {
     private var _binding : FragmentIntroViewPagerBinding? = null
     private val binding : FragmentIntroViewPagerBinding get() = _binding!!
     private val introViewPagerAdapter by lazy { IntroViewPagerAdapter(::navigateToDashboard) }
-    val pagerImages = listOf(
+    private val pagerImages = listOf(
         R.raw.view_pager_image1,
         R.raw.view_pager_image2,
         R.raw.view_pager_image3

@@ -1,7 +1,7 @@
 package com.alecbrando.musicplayer.presentation.adapters
 
+import android.media.AudioManager
 import android.media.MediaPlayer
-import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,6 +12,7 @@ import com.alecbrando.musicplayer.domains.models.Songs
 
 class DashboardAdapter : RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder>() {
     private var songs: MutableList<Songs> = mutableListOf()
+    private var mediaPlayer = MediaPlayer()
 
     inner class DashboardViewHolder(
         private val binding: DashboardRecyclerViewBinding
@@ -19,11 +20,10 @@ class DashboardAdapter : RecyclerView.Adapter<DashboardAdapter.DashboardViewHold
         fun displaySongs(songs: Songs) = with(binding) {
             ivSong.load(songs.albumPicture)
             tvSongTitle.text = songs.name
-            root.setOnClickListener{
-                playSong(songs.mp3, binding)
+            ivSong.setOnClickListener{
+                playSong(songs.mp3)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardViewHolder {
@@ -49,19 +49,21 @@ class DashboardAdapter : RecyclerView.Adapter<DashboardAdapter.DashboardViewHold
         notifyDataSetChanged()
     }
 
-    private fun playSong(mp3: String, binding: DashboardRecyclerViewBinding){
-        val mediaPlayer = MediaPlayer()
-        try{
+    private fun playSong(mp3: String){
+        if(mediaPlayer.isPlaying){
             mediaPlayer.stop()
+            mediaPlayer.reset()
+            mediaPlayer.release()
+        }
+        mediaPlayer = MediaPlayer()
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        try{
+            mediaPlayer.setDataSource(mp3)
+            mediaPlayer.prepare()
+            mediaPlayer.start()
 
         } catch(e: Exception){
-
+            e.message
         }
-        mediaPlayer.setDataSource(binding.root.context, Uri.parse(mp3))
-        mediaPlayer.prepare()
-        mediaPlayer.start()
-
-
     }
-
 }
