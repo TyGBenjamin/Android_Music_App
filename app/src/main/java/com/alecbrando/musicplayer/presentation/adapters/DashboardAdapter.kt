@@ -1,12 +1,13 @@
 package com.alecbrando.musicplayer.presentation.adapters
 
+import android.media.MediaPlayer
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.alecbrando.musicplayer.databinding.DashboardRecyclerViewBinding
-import com.alecbrando.musicplayer.databinding.FragmentDashboardBinding
 import com.alecbrando.musicplayer.domains.models.Songs
 
 class DashboardAdapter : RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder>() {
@@ -16,15 +17,17 @@ class DashboardAdapter : RecyclerView.Adapter<DashboardAdapter.DashboardViewHold
         private val binding: DashboardRecyclerViewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun displaySongs(songs: Songs) = with(binding) {
-            Log.d("Logger", "displaySongs: ${songs.name}")
             ivSong.load(songs.albumPicture)
             tvSongTitle.text = songs.name
+            root.setOnClickListener{
+                playSong(songs.mp3, binding)
+            }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardViewHolder {
-        val binding =
-            DashboardRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = DashboardRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DashboardViewHolder(binding)
     }
 
@@ -45,4 +48,20 @@ class DashboardAdapter : RecyclerView.Adapter<DashboardAdapter.DashboardViewHold
         }
         notifyDataSetChanged()
     }
+
+    private fun playSong(mp3: String, binding: DashboardRecyclerViewBinding){
+        val mediaPlayer = MediaPlayer()
+        try{
+            mediaPlayer.stop()
+
+        } catch(e: Exception){
+
+        }
+        mediaPlayer.setDataSource(binding.root.context, Uri.parse(mp3))
+        mediaPlayer.prepare()
+        mediaPlayer.start()
+
+
+    }
+
 }

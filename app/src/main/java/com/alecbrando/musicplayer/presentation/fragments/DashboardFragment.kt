@@ -1,15 +1,10 @@
 package com.alecbrando.musicplayer.presentation.fragments
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.alecbrando.musicplayer.R
 import com.alecbrando.musicplayer.databinding.FragmentDashboardBinding
 import com.alecbrando.musicplayer.presentation.adapters.DashboardAdapter
@@ -19,8 +14,6 @@ import com.alecbrando.musicplayer.presentation.viewmodels.DashboardViewModelBott
 import com.alecbrando.musicplayer.resources.Resource
 import com.alecbrando.musicplayer.utils.collectLatestLifecycleFlow
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
@@ -42,7 +35,7 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        initListeners(view)
+        initListeners()
     }
 
     private fun initViews() = with(binding) {
@@ -70,32 +63,30 @@ class DashboardFragment : Fragment() {
         }
     }
 
-    private fun initListeners(view: View) = with(binding) {
+    private fun initListeners() = with(binding) {
         btnSearch.setOnClickListener {
-            searchMenu(view)
+            searchMenu()
         }
     }
 
-    private fun searchMenu(view: View) = with(binding) {
-        val popup = PopupMenu(context, view)
+    private fun searchMenu() = with(binding) {
+        val popup = PopupMenu(context, this.btnSearch)
         popup.inflate(R.menu.search_menu)
-        popup.gravity = Gravity.END
-        popup.show()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.mi_country -> {
-                Log.d(TAG, "onOptionsItemSelected: Wtf")
+        popup.setOnMenuItemClickListener{ item -> 
+            when(item.itemId){
+                R.id.mi_country -> {
+                    true
+                }
+                R.id.mi_hip_hop -> {true}
+                R.id.mi_edm -> {true}
+                R.id.mi_random -> {true}
+                R.id.mi_jazz -> {true}
+                R.id.mi_metal -> {true}
+                R.id.mi_reggae -> {true}
+                R.id.mi_synthwave -> {true}
+                else -> false
             }
-            R.id.mi_hip_hop -> {}
-            R.id.mi_edm -> {}
-            R.id.mi_random -> {}
-            R.id.mi_jazz -> {}
-            R.id.mi_metal -> {}
-            R.id.mi_reggae -> {}
-            R.id.mi_synthwave -> {}
         }
-        return true
+        popup.show()
     }
 }

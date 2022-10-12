@@ -22,9 +22,6 @@ class IntroViewPagerFragment: Fragment() {
         R.raw.view_pager_image3
     )
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,6 +33,7 @@ class IntroViewPagerFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        navigateToDashboard()
     }
 
     private fun initViews() = with(binding){
