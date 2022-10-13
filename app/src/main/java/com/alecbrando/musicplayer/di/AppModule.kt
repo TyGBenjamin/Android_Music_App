@@ -1,12 +1,16 @@
 package com.alecbrando.musicplayer.di
 
+import android.content.Context
 import com.alecbrando.musicplayer.data.repository.RepositoryImpl
 import com.alecbrando.musicplayer.data.service.ApiService
+import com.alecbrando.musicplayer.domains.datastore.DataStoreRepository
+import com.alecbrando.musicplayer.domains.datastore.DataStoreRepositoryImpl
 import com.alecbrando.musicplayer.domains.repository.Repository
 import com.alecbrando.musicplayer.utils.SongsUrl.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,4 +30,10 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRepo(apiService: ApiService): Repository = RepositoryImpl(apiService)
+
+    @Singleton
+    @Provides
+    fun providesDataStore(@ApplicationContext context: Context): DataStoreRepository{
+        return DataStoreRepositoryImpl(context)
+    }
 }

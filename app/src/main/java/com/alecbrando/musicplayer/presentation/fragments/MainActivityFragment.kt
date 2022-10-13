@@ -11,11 +11,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.alecbrando.musicplayer.databinding.FragmentMainActivityBinding
+import com.alecbrando.musicplayer.domains.datastore.DataStoreRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
+import javax.inject.Inject
 import kotlin.concurrent.schedule
 import kotlin.math.log
 
@@ -23,6 +26,9 @@ import kotlin.math.log
 class MainActivityFragment: Fragment() {
     private var _binding : FragmentMainActivityBinding? = null
     private val binding : FragmentMainActivityBinding get() = _binding!!
+
+    @Inject
+    lateinit var dataStore: DataStoreRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +52,13 @@ class MainActivityFragment: Fragment() {
     }
 
     private fun navigateToIntroViewPagerFragment() {
-        findNavController().navigate(MainActivityFragmentDirections.actionMainActivityFragmentToIntroViewPagerFragment())
+        lifecycleScope.launch {
+            if (dataStore.getDataStore().first()) {
+                findNavController().navigate(MainActivityFragmentDirections.actionMainActivityFragmentToDashboardFragment())
+            } else {
+                findNavController().navigate(MainActivityFragmentDirections.actionMainActivityFragmentToIntroViewPagerFragment())
+            }
+        }
     }
 
 }

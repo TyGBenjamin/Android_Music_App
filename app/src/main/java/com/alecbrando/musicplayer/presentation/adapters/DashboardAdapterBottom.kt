@@ -1,5 +1,7 @@
 package com.alecbrando.musicplayer.presentation.adapters
 
+import android.content.ContentValues
+import android.util.Log
 import android.view.*
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,17 +13,22 @@ import com.alecbrando.musicplayer.databinding.DashboardRecyclerViewBinding
 import com.alecbrando.musicplayer.databinding.DashboardRecyclerViewBottomBinding
 import com.alecbrando.musicplayer.domains.models.Songs
 
-class DashboardAdapterBottom : RecyclerView.Adapter<DashboardAdapterBottom.DashboardViewHolder>() {
+class DashboardAdapterBottom(
+    private val playSong:(mp3: String, songs: MutableList<Songs>) -> Unit
+) : RecyclerView.Adapter<DashboardAdapterBottom.DashboardViewHolder>() {
     private var songs: MutableList<Songs> = mutableListOf()
 
     inner class DashboardViewHolder(
         private val binding: DashboardRecyclerViewBottomBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun displaySongs(songs: Songs) = with(binding) {
-            ivSongBottom.load(songs.albumPicture)
-            tvSongTitleBottom.text = songs.name
+        fun displaySongs(song: Songs) = with(binding) {
+            ivSongBottom.load(song.albumPicture)
+            tvSongTitleBottom.text = song.name
             btnDownload.setOnClickListener {
                 inflateDownloadButton(binding)
+            }
+            root.setOnClickListener{
+                playSong(song.mp3, songs)
             }
         }
     }

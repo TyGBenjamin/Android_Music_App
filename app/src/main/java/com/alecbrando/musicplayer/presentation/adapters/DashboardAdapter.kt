@@ -1,27 +1,33 @@
 package com.alecbrando.musicplayer.presentation.adapters
 
+import android.content.ContentValues.TAG
 import android.media.AudioManager
+import android.media.Image
 import android.media.MediaPlayer
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.alecbrando.musicplayer.R
 import com.alecbrando.musicplayer.databinding.DashboardRecyclerViewBinding
 import com.alecbrando.musicplayer.domains.models.Songs
+import com.alecbrando.musicplayer.presentation.fragments.DashboardFragment
 
-class DashboardAdapter : RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder>() {
+class DashboardAdapter(
+    private val playSong:(mp3: String, songs: MutableList<Songs>) -> Unit
+) : RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder>() {
     private var songs: MutableList<Songs> = mutableListOf()
-    private var mediaPlayer = MediaPlayer()
 
     inner class DashboardViewHolder(
         private val binding: DashboardRecyclerViewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun displaySongs(songs: Songs) = with(binding) {
-            ivSong.load(songs.albumPicture)
-            tvSongTitle.text = songs.name
-            ivSong.setOnClickListener{
-                playSong(songs.mp3)
+        fun displaySongs(song: Songs) = with(binding) {
+            ivSong.load(song.albumPicture)
+            tvSongTitle.text = song.name
+            root.setOnClickListener{
+                playSong(song.mp3, songs)
             }
         }
     }
@@ -47,23 +53,5 @@ class DashboardAdapter : RecyclerView.Adapter<DashboardAdapter.DashboardViewHold
             this.songs = songs as MutableList<Songs>
         }
         notifyDataSetChanged()
-    }
-
-    private fun playSong(mp3: String){
-        if(mediaPlayer.isPlaying){
-            mediaPlayer.stop()
-            mediaPlayer.reset()
-            mediaPlayer.release()
-        }
-        mediaPlayer = MediaPlayer()
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
-        try{
-            mediaPlayer.setDataSource(mp3)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-
-        } catch(e: Exception){
-            e.message
-        }
     }
 }

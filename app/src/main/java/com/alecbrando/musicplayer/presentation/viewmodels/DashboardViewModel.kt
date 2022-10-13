@@ -23,7 +23,6 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
-    private val getAllSongsUseCase: GetAllSongsUseCase,
     private  val getSongsByGenreUseCase: GetSongsByGenreUseCase
 ): ViewModel() {
     private var _songList : MutableStateFlow<Resource<SongsWrapper>> = MutableStateFlow(Resource.Idle)
@@ -33,10 +32,7 @@ class DashboardViewModel @Inject constructor(
         getSongByGenre("random")
     }
 
-
-
-
-    private fun getSongByGenre(genre: String){
+    fun getSongByGenre(genre: String){
         viewModelScope.launch {
             _songList.value = getSongsByGenreUseCase(genre)
         }
