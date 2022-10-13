@@ -4,7 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+@Entity(tableName = "songs")
 data class Songs(
+    @PrimaryKey(autoGenerate = false)
     val id : String,
     val name: String,
     val artist: String,
@@ -12,15 +14,3 @@ data class Songs(
     val albumPicture: String,
     val mp3: String
 )
-//
-//@Entity(tableName = "notes")
-//data class Note(
-//    @PrimaryKey(autoGenerate = true)
-//    @ColumnInfo
-//    val id : Int = 0,
-//    @ColumnInfo
-//    val title: String,
-//    @ColumnInfo
-//    val body:String,
-//
-//    )

@@ -59,7 +59,17 @@ fun Fragment.playMusic(
                 e.message
             }
         } else{
-            val toast : Toast = Toast.makeText(context, "You are at the end of the list...", Toast.LENGTH_LONG)
+            try{
+                binding.mediaPlayerImage.load((songsList as MutableList<Songs>).get(0).albumPicture)
+                binding.mediaPlayerName.text = (songsList as MutableList<Songs>).get(0).name
+                mediaPlayer.setDataSource((songsList as MutableList<Songs>).get(0).mp3)
+                mediaPlayer.prepare()
+                mediaPlayer.start()
+                songIndex = 0
+            } catch(e: Exception){
+                e.message
+            }
+            val toast : Toast = Toast.makeText(context, "You are at the end of the list, replay from the start...", Toast.LENGTH_LONG)
             toast.show()
         }
     }

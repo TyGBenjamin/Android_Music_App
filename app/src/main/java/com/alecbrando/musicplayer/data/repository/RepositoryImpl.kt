@@ -1,5 +1,6 @@
 package com.alecbrando.musicplayer.data.repository
 
+import com.alecbrando.musicplayer.data.local.SongsDatabase
 import com.alecbrando.musicplayer.data.service.ApiService
 import com.alecbrando.musicplayer.domains.models.SongsWrapper
 import com.alecbrando.musicplayer.domains.repository.Repository
@@ -8,7 +9,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class RepositoryImpl @Inject constructor(private val apiService: ApiService): Repository {
+class RepositoryImpl @Inject constructor(
+    private val apiService: ApiService,
+    private val songsDatabase: SongsDatabase
+): Repository {
     override suspend fun getAllSongs(): Resource<SongsWrapper> = withContext(Dispatchers.IO){
         return@withContext try{
             val res = apiService.getAllSongs()
