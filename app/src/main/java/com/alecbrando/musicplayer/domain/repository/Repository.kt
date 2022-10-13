@@ -5,6 +5,7 @@ import com.alecbrando.musicplayer.domain.models.SongX
 import com.alecbrando.musicplayer.util.Resource
 
 interface Repository {
-    suspend fun getSongList() : Resource<SongX>
+    suspend fun getSongList() : Resource<SongList>
+    suspend fun getGenres(genre: String): Resource<SongList>
 
 }

@@ -1,6 +1,6 @@
 package com.alecbrando.musicplayer.domain.models
 
 class SongList (
-    val data: List<SongX>
+    val songs: List<SongX>
 
 )
