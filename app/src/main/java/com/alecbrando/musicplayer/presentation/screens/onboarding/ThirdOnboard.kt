@@ -1,14 +1,12 @@
 package com.alecbrando.musicplayer.presentation.screens.onboarding
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.alecbrando.musicplayer.R
-import com.alecbrando.musicplayer.databinding.FragmentDashboardBinding
 import com.alecbrando.musicplayer.databinding.FragmentThirdOnboardBinding
 import com.alecbrando.musicplayer.domain.datastore.DataStorePrefSource
 import dagger.hilt.android.AndroidEntryPoint
