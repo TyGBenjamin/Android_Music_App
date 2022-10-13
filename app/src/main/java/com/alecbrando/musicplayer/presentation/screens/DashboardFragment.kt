@@ -1,5 +1,6 @@
 package com.alecbrando.musicplayer.presentation.screens
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.alecbrando.musicplayer.adapters.GridViewAdapter
 import com.alecbrando.musicplayer.adapters.ListViewAdapter
 import com.alecbrando.musicplayer.databinding.FragmentDashboardBinding
+import com.alecbrando.musicplayer.domain.model.Song
 import com.alecbrando.musicplayer.util.Constants.TAG
 import com.alecbrando.musicplayer.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,8 +30,10 @@ class DashboardFragment : Fragment() {
     private val binding: FragmentDashboardBinding get() = _binding!!
     private val viewModel by viewModels<ListViewModel>()
     private val viewModelGrid by viewModels<GridViewModel>()
-    private val gridViewAdapter by lazy { GridViewAdapter() }
-    private val listViewAdapter by lazy { ListViewAdapter() }
+    private val gridViewAdapter by lazy { GridViewAdapter(::playSong) }
+    private val listViewAdapter by lazy { ListViewAdapter(::playSong) }
+    private val player = MediaPlayer()
+    private lateinit var songList: List<Song>
 
 
 
@@ -83,6 +87,12 @@ class DashboardFragment : Fragment() {
             ).joinAll()
 
 //                }
+        }
+
+    }
+    private fun playSong(mp3: String? = null, songList: List<Song>? = null) = with(binding){
+        if(!mp3.isNullOrEmpty()){
+            println("")
         }
 
     }

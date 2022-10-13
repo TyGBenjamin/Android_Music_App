@@ -36,7 +36,10 @@
         app:layout_constraintTop_toBottomOf="@+id/rv_view"
         tools:itemCount="10"
         tools:listitem="@layout/single_song" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/nav_bar_view"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="82dp"
         android:layout_marginBottom="4dp"
@@ -45,6 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
+
 
         <androidx.constraintlayout.utils.widget.ImageFilterButton
             android:id="@+id/imageFilterButton"
@@ -92,8 +96,12 @@
             android:backgroundTint="@color/teal_700"
             android:drawableBottom="@drawable/ic_baseline_motion_photos_pause_24"
 
-            tools:layout_editor_absoluteX="252dp"
-            tools:layout_editor_absoluteY="16dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_play"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/songPlaying"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
 
         <Button
             android:id="@+id/btn_play"
@@ -102,8 +110,12 @@
             android:backgroundTint="@color/teal_700"
             android:drawableBottom="@drawable/ic_baseline_play_circle_filled_24"
 
-            tools:layout_editor_absoluteX="292dp"
-            tools:layout_editor_absoluteY="16dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_stop"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_pause"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
 
         <Button
             android:id="@+id/btn_stop"
@@ -112,8 +124,12 @@
             android:backgroundTint="@color/teal_700"
             android:drawableBottom="@drawable/ic_baseline_stop_24"
 
-            tools:layout_editor_absoluteX="330dp"
-            tools:layout_editor_absoluteY="17dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_next"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_play"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
 
         <Button
             android:id="@+id/btn_next"
@@ -122,8 +138,14 @@
             android:backgroundTint="@color/teal_700"
             android:drawableBottom="@drawable/ic_baseline_navigate_next_24"
 
-            tools:layout_editor_absoluteX="364dp"
-            tools:layout_editor_absoluteY="17dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_stop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,10 +7,12 @@ import coil.load
 import com.alecbrando.musicplayer.databinding.SingleSongBinding
 import com.alecbrando.musicplayer.domain.model.Song
 
-class ListViewAdapter : RecyclerView.Adapter<ListViewAdapter.ListViewHolder>() {
+class ListViewAdapter(
+    private val playSong :(mp3: String, songs: List<Song>)-> Unit
+) : RecyclerView.Adapter<ListViewAdapter.ListViewHolder>() {
     private var songList: List<Song> = mutableListOf()
 
-    class ListViewHolder(
+    inner class ListViewHolder(
         private val binding: SingleSongBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -20,9 +22,10 @@ class ListViewAdapter : RecyclerView.Adapter<ListViewAdapter.ListViewHolder>() {
             tvTitle.text = song.name
             tvArtist.text = song.artist
             println("apply")
+            playSong(song.mp3, songList)
 
             root.setOnClickListener{
-                println("CLICK song has been clicked")
+                println("CLICK song has been clicked ${song.mp3}")
             }
         }
 

@@ -7,16 +7,23 @@ import coil.load
 import com.alecbrando.musicplayer.databinding.SingleImageBinding
 import com.alecbrando.musicplayer.domain.model.Song
 
-class GridViewAdapter : RecyclerView.Adapter<GridViewAdapter.GridViewHolder>() {
+class GridViewAdapter(
+    private val playSong :(mp3: String, songs: List<Song>)-> Unit)
+    : RecyclerView.Adapter<GridViewAdapter.GridViewHolder>() {
     private var songList: List<Song> = mutableListOf()
 
-    class GridViewHolder(
+    inner class GridViewHolder(
         private val binding: SingleImageBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun applySong(song: Song) = with(binding) {
             imageView.load(song.albumPicture)
             tvTitle.text = song.artist
             println("apply")
+            playSong(song.mp3, songList)
+
+            root.setOnClickListener{
+                println("CLICK song has been clicked ${song.mp3}")
+            }
         }
     }
 
