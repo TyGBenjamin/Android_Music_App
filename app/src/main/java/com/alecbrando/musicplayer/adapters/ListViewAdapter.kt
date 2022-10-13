@@ -13,12 +13,19 @@ class ListViewAdapter : RecyclerView.Adapter<ListViewAdapter.ListViewHolder>() {
     class ListViewHolder(
         private val binding: SingleSongBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
+
         fun applySong(song: Song) = with(binding) {
             imageView.load(song.albumPicture)
             tvTitle.text = song.name
             tvArtist.text = song.artist
             println("apply")
+
+            root.setOnClickListener{
+                println("CLICK song has been clicked")
+            }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.alecbrando.musicplayer.adapters.ViewPagerAdapter
 import com.alecbrando.musicplayer.databinding.FragmentViewPager2Binding
+import dagger.hilt.android.AndroidEntryPoint
 
 
 /**
@@ -14,6 +15,7 @@ import com.alecbrando.musicplayer.databinding.FragmentViewPager2Binding
  * Use the [ViewPager.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class ViewPager : Fragment() {
     private var _binding: FragmentViewPager2Binding? = null
     private val binding: FragmentViewPager2Binding  get() = _binding!!

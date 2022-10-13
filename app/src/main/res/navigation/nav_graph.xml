@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/viewPager2">
-
-
+    app:startDestination="@id/viewPager2"
+    >
 
 <!--    <fragment-->
 <!--        android:id="@+id/onboarding"-->
@@ -24,9 +23,6 @@
         tools:layout="@layout/fragment_view_pager2" >
         <action
             android:id="@+id/action_viewPager2_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
-        <action
-            android:id="@+id/action_viewPager2_to_dashboardFragment2"
             app:destination="@id/dashboardFragment" />
     </fragment>
     <fragment

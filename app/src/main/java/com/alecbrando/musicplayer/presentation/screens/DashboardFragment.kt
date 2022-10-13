@@ -20,6 +20,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 
+
+
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
@@ -28,6 +30,8 @@ class DashboardFragment : Fragment() {
     private val viewModelGrid by viewModels<GridViewModel>()
     private val gridViewAdapter by lazy { GridViewAdapter() }
     private val listViewAdapter by lazy { ListViewAdapter() }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -83,3 +87,8 @@ class DashboardFragment : Fragment() {
 
     }
 }
+
+/**
+ * DashboardFragment
+ * @author Tyler Gandy 2022-09-21
+ */

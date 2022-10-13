@@ -5,15 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.alecbrando.musicplayer.R
 import com.alecbrando.musicplayer.databinding.FragmentDashboardBinding
 import com.alecbrando.musicplayer.databinding.FragmentThirdOnboardBinding
+import com.alecbrando.musicplayer.domain.datastore.DataStorePrefSource
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class ThirdOnboard : Fragment() {
     private var _binding: FragmentThirdOnboardBinding? = null
     private val binding: FragmentThirdOnboardBinding get() = _binding!!
+
+    @Inject
+    lateinit var dataStorePrefImpl: DataStorePrefSource
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +42,8 @@ class ThirdOnboard : Fragment() {
         }
     }
 
-    private fun navigateToDashboard() {
+    private fun navigateToDashboard() = lifecycleScope.launch {
+        dataStorePrefImpl.setPreferenceInfo(true)
         val action = ViewPagerDirections.actionViewPager2ToDashboardFragment()
         findNavController().navigate(action)
     }

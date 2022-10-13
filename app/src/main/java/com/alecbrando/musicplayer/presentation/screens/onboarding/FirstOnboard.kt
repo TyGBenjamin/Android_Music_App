@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.alecbrando.musicplayer.R
-
+import dagger.hilt.android.AndroidEntryPoint
 
 
 /**
@@ -14,6 +14,7 @@ import com.alecbrando.musicplayer.R
  * Use the [FirstOnboard.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class FirstOnboard : Fragment() {
 
 
