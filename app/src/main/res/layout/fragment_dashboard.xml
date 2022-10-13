@@ -51,7 +51,7 @@
 
 
         <androidx.constraintlayout.utils.widget.ImageFilterButton
-            android:id="@+id/imageFilterButton"
+            android:id="@+id/albumPlayer"
             android:layout_width="104dp"
             android:layout_height="76dp"
             android:src="@android:drawable/ic_menu_set_as"
