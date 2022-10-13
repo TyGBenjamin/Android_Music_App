@@ -18,14 +18,13 @@ class TopRecyclerViewModel @Inject constructor(private val repo : RepositoryImpl
     val artist = _artist.asStateFlow()
 
     init {
-        getSongGenre("jazz")
+        getGenre("jazz")
     }
 
 
-    fun getSongGenre(genre: String) {
-        viewModelScope.launch {
-            _artist.value = repo.getGenres(genre)
-        }
+    fun getGenre(genre: String)= viewModelScope.launch{
+        _artist.value = repo.getGenres(genre)
+
     }
 
 }

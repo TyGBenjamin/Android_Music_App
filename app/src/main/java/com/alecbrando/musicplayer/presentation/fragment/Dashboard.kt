@@ -63,14 +63,14 @@ class Dashboard : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when (menuItem.itemId) {
-                    R.id.Metal ->{}
-                    R.id.hip_hop ->{}
-                    R.id.country->{}
-                    R.id.edm ->{}
-                    R.id.Random ->{}
-                    R.id.Reggae ->{}
-                    R.id.jazz ->{}
-                    R.id.synthWave ->{}
+                    R.id.Metal ->{topViewModel.getGenre("metal")}
+                    R.id.hip_hop ->{topViewModel.getGenre("hip_hop")}
+                    R.id.country->{topViewModel.getGenre("county")}
+                    R.id.edm ->{topViewModel.getGenre("edm")}
+                    R.id.Random ->{topViewModel.getGenre("random")}
+                    R.id.Reggae ->{topViewModel.getGenre("reggae")}
+                    R.id.jazz ->{topViewModel.getGenre("jazz")}
+                    R.id.synthWave ->{topViewModel.getGenre("synthwave")}
                 }
                 return true
             }
