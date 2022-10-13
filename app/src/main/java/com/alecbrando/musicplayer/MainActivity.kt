@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(action)
             }
         }
-        supportActionBar?.hide()
+//        supportActionBar?.hide()
     }
 
 }

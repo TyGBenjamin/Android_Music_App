@@ -30,9 +30,9 @@ class ListViewAdapter(
             root.setOnClickListener{
                 println("CLICK song has been clicked ${song.mp3}")
                 playSong(song.mp3, songList,0)
-                binding2?.artistiPlaying?.text = song.artist
-                binding2?.songPlaying?.text = song.name
-                binding2?.albumPlayer?.load(song.albumPicture)
+//                binding2?.artistiPlaying?.text = song.artist
+//                binding2?.songPlaying?.text = song.name
+//                binding2?.albumPlayer?.load(song.albumPicture)
 
             }
         }
