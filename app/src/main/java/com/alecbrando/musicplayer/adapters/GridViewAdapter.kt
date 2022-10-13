@@ -23,9 +23,9 @@ class GridViewAdapter(
 
             root.setOnClickListener{
                 playSong(song.mp3, songList, 0)
-                binding2?.artistiPlaying?.text = song.artist
-                binding2?.songPlaying?.text = song.name
-                binding2?.albumPlayer?.load(song.albumPicture)
+//                binding2?.artistiPlaying?.text = song.artist
+//                binding2?.songPlaying?.text = song.name
+//                binding2?.albumPlayer?.load(song.albumPicture)
             }
         }
     }

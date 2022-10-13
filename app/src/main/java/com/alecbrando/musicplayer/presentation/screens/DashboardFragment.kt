@@ -4,14 +4,15 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.alecbrando.musicplayer.R
 import com.alecbrando.musicplayer.adapters.GridViewAdapter
 import com.alecbrando.musicplayer.adapters.ListViewAdapter
 import com.alecbrando.musicplayer.databinding.FragmentDashboardBinding
@@ -48,8 +49,37 @@ class DashboardFragment : Fragment() {
 //
         initViews()
         initListeners()
+        setUpMenu()
 
 
+    }
+
+    private fun setUpMenu() {
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
+            override fun onPrepareMenu(menu: Menu) {
+                // Handle for example visibility of menu items
+            }
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Add menu items here
+                menuInflater.inflate(R.menu.drop_down, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Handle the menu selection
+                when (menuItem.itemId) {
+                    R.id.hip_hop -> {viewModelGrid.getGenre("hip_hop")}
+                    R.id.Metal -> {viewModelGrid.getGenre("metal")}
+                    R.id.Random -> {viewModelGrid.getGenre("random")}
+                    R.id.Reggae -> {viewModelGrid.getGenre("reggae")}
+                    R.id.synthWave -> {viewModelGrid.getGenre("synthwave")}
+                    R.id.jazz -> {viewModelGrid.getGenre("jazz")}
+                    R.id.edm -> {viewModelGrid.getGenre("edm")}
+
+                }
+                return true
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun initListeners() = with(binding) {
@@ -57,6 +87,7 @@ class DashboardFragment : Fragment() {
         btnPlay.setOnClickListener { player.start() }
         btnStop.setOnClickListener {
             stopMedia()
+            navBarView.visibility = View.GONE
         }
         btnNext.setOnClickListener{
 
@@ -105,6 +136,7 @@ class DashboardFragment : Fragment() {
     private fun playSong(mp3: String? = null, song: List<Song>? = null, position: Int) = with(binding) {
         if(mp3!!.isNotEmpty()) {
 //            stopMedia()
+            navBarView.visibility = View.VISIBLE
             loadMedia(mp3)
         }
     }
