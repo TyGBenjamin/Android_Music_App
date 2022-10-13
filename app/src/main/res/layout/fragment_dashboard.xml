@@ -9,32 +9,123 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="416dp"
+        android:layout_height="238dp"
         android:layout_gravity="center"
+        android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/rv_view2"
+        app:layout_constraintBottom_toTopOf="@+id/rv_view2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        android:orientation="horizontal"
+        app:layout_constraintVertical_bias="0.5"
         app:spanCount="2"
-        tools:listitem="@layout/single_image"
-        tools:itemCount="10"/>
+        tools:itemCount="10"
+        tools:listitem="@layout/single_image" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_view2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="442dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_view"
-        app:layout_constraintVertical_bias="0.778"
-        tools:itemCount="5"
+        app:layout_constraintTop_toBottomOf="@+id/rv_view"
+        tools:itemCount="10"
         tools:listitem="@layout/single_song" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterButton
+            android:id="@+id/imageFilterButton"
+            android:layout_width="104dp"
+            android:layout_height="76dp"
+            android:src="@android:drawable/ic_menu_set_as"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/songPlaying"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
+            android:text="Song Name"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/artistiPlaying"
+            app:layout_constraintEnd_toStartOf="@+id/button2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageFilterButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/artistiPlaying"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Artist Name"
+            android:textColor="@color/teal_700"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageFilterButton"
+            app:layout_constraintTop_toBottomOf="@+id/songPlaying"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/btn_pause"
+            android:layout_width="31dp"
+            android:layout_height="45dp"
+            android:backgroundTint="@color/teal_700"
+            android:drawableBottom="@drawable/ic_baseline_motion_photos_pause_24"
+
+            tools:layout_editor_absoluteX="252dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <Button
+            android:id="@+id/btn_play"
+            android:layout_width="31dp"
+            android:layout_height="45dp"
+            android:backgroundTint="@color/teal_700"
+            android:drawableBottom="@drawable/ic_baseline_play_circle_filled_24"
+
+            tools:layout_editor_absoluteX="292dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="31dp"
+            android:layout_height="45dp"
+            android:backgroundTint="@color/teal_700"
+            android:drawableBottom="@drawable/ic_baseline_stop_24"
+
+            tools:layout_editor_absoluteX="330dp"
+            tools:layout_editor_absoluteY="17dp" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="31dp"
+            android:layout_height="45dp"
+            android:backgroundTint="@color/teal_700"
+            android:drawableBottom="@drawable/ic_baseline_navigate_next_24"
+
+            tools:layout_editor_absoluteX="364dp"
+            tools:layout_editor_absoluteY="17dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
