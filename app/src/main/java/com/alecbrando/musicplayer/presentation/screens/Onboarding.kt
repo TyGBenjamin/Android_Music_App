@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.alecbrando.musicplayer.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class Onboarding : Fragment() {
 
 //    companion object {
