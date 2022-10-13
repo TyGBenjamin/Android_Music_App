@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import coil.load
 import com.alecbrando.musicplayer.R
 import com.alecbrando.musicplayer.adapters.GridViewAdapter
 import com.alecbrando.musicplayer.adapters.ListViewAdapter
@@ -133,11 +134,15 @@ class DashboardFragment : Fragment() {
 
     }
 
-    private fun playSong(mp3: String? = null, song: List<Song>? = null, position: Int) = with(binding) {
-        if(mp3!!.isNotEmpty()) {
+    private fun playSong(song: Song, songlist: List<Song>? = null, position: Int) = with(binding) {
+        stopMedia()
+        if(song.mp3.isNotEmpty()) {
 //            stopMedia()
             navBarView.visibility = View.VISIBLE
-            loadMedia(mp3)
+            artistiPlaying.text = song.artist
+            songPlaying.text = song.name
+            albumPlayer.load(song.albumPicture)
+            loadMedia(song.mp3)
         }
     }
 

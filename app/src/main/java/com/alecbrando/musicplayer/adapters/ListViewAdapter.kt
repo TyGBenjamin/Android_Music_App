@@ -9,7 +9,7 @@ import com.alecbrando.musicplayer.databinding.SingleSongBinding
 import com.alecbrando.musicplayer.domain.model.Song
 
 class ListViewAdapter(
-    private val playSong :(mp3: String, songs: List<Song>, position: Int)-> Unit
+    private val playSong :(song: Song, songs: List<Song>, position: Int)-> Unit
 ) : RecyclerView.Adapter<ListViewAdapter.ListViewHolder>() {
     private var songList: List<Song> = mutableListOf()
 
@@ -29,7 +29,7 @@ class ListViewAdapter(
 
             root.setOnClickListener{
                 println("CLICK song has been clicked ${song.mp3}")
-                playSong(song.mp3, songList,0)
+                playSong(song, songList,0)
 //                binding2?.artistiPlaying?.text = song.artist
 //                binding2?.songPlaying?.text = song.name
 //                binding2?.albumPlayer?.load(song.albumPicture)
