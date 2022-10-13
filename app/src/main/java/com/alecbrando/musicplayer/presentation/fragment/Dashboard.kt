@@ -1,5 +1,6 @@
 package com.alecbrando.musicplayer.presentation.fragment
 
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -30,7 +32,7 @@ class Dashboard : Fragment() {
     private val viewModel by viewModels<DashboardViewModel>()
     private val topViewModel by viewModels<TopRecyclerViewModel>()
     private val dashboardAdapter by lazy { DashboardAdapter(::playSong) }
-    private val topRecyclerViewAdapter by lazy{TopRecyclerViewAdapter()}
+    private val topRecyclerViewAdapter by lazy{TopRecyclerViewAdapter(::playSong)}
     private val player = MediaPlayer()
     private lateinit var songList : List<SongX>
 
@@ -77,8 +79,25 @@ class Dashboard : Fragment() {
     }
 
     private fun playSong(mp3: String? = null, song: List<SongX>? = null)=with(binding){
-        if(!mp3.isNullOrEmpty()){
+//        if(!mp3.isNullOrEmpty()){
+//
+//        }
+        btnPlay.setOnClickListener {
+            player.setAudioStreamType(AudioManager.STREAM_MUSIC)
+            try {
+                player.setDataSource(mp3)
+                player.prepare()
+                player.start()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            Log.d("Music", "It's playing")
 
-        }
+
+
+
+
+
+
     }
 }

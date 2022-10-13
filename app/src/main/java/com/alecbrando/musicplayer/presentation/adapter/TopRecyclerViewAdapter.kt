@@ -9,17 +9,25 @@ import com.alecbrando.musicplayer.databinding.ArtistBinding
 import com.alecbrando.musicplayer.databinding.SongBinding
 import com.alecbrando.musicplayer.domain.models.SongX
 
-class TopRecyclerViewAdapter: RecyclerView.Adapter<TopRecyclerViewAdapter.TopViewHolder>() {
+class TopRecyclerViewAdapter(
+    private val playSong:(mp3: String, songs: List<SongX>) -> Unit
+): RecyclerView.Adapter<TopRecyclerViewAdapter.TopViewHolder>() {
     private lateinit var genre: List<SongX>
+//    private lateinit var songs: List<SongX>
 
     inner class TopViewHolder(
         private val binding: ArtistBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun apply(songs: SongX) = with(binding) {
-            Log.d("Logger", "displaySongs: ${songs.name}")
-            imageView2.load(songs.albumPicture)
-            tvSong2.text = songs.name
+        fun apply(song: SongX) = with(binding) {
+            Log.d("Logger", "displaySongs: ${song.name}")
+            imageView2.load(song.albumPicture)
+            tvSong2.text = song.name
+
+            root.setOnClickListener{
+                println("Song Clicked ${song.name}")
+                playSong(song.mp3, genre)
+            }
         }
 
     }

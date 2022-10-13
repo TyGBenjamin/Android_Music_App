@@ -25,7 +25,18 @@ class DashboardAdapter(
             imageView.load(song.albumPicture)
             tvTitle.text = song.name
             tvArtist.text = song.artist
-            playSong(song.mp3, songs)
+
+
+
+            root.setOnClickListener{
+                println("Song Clicked ${song.name}")
+                playSong(song.mp3, songs)
+            }
+
+
+
+
+
         }
 
     }
