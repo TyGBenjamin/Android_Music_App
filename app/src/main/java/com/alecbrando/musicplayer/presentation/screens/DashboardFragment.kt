@@ -1,5 +1,7 @@
 package com.alecbrando.musicplayer.presentation.screens
 
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.alecbrando.musicplayer.adapters.GridViewAdapter
 import com.alecbrando.musicplayer.adapters.ListViewAdapter
 import com.alecbrando.musicplayer.databinding.FragmentDashboardBinding
+import com.alecbrando.musicplayer.domain.model.Song
 import com.alecbrando.musicplayer.util.Constants.TAG
 import com.alecbrando.musicplayer.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,16 +24,16 @@ import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 
 
-
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding: FragmentDashboardBinding get() = _binding!!
     private val viewModel by viewModels<ListViewModel>()
     private val viewModelGrid by viewModels<GridViewModel>()
-    private val gridViewAdapter by lazy { GridViewAdapter() }
-    private val listViewAdapter by lazy { ListViewAdapter() }
-
+    private val gridViewAdapter by lazy { GridViewAdapter(::playSong) }
+    private val listViewAdapter by lazy { ListViewAdapter(::playSong) }
+    private val player = MediaPlayer()
+    private lateinit var songList: List<Song>
 
 
     override fun onCreateView(
@@ -44,8 +47,20 @@ class DashboardFragment : Fragment() {
 //        setUpMenu()
 //
         initViews()
-//        initListeners()
+        initListeners()
 
+
+    }
+
+    private fun initListeners() = with(binding) {
+        btnPause.setOnClickListener { player.pause() }
+        btnPlay.setOnClickListener { player.start() }
+        btnStop.setOnClickListener {
+            stopMedia()
+        }
+        btnNext.setOnClickListener{
+
+        }
     }
 
     private fun initViews() = with(binding) {
@@ -85,6 +100,31 @@ class DashboardFragment : Fragment() {
 //                }
         }
 
+    }
+
+    private fun playSong(mp3: String? = null, song: List<Song>? = null, position: Int) = with(binding) {
+        if(mp3!!.isNotEmpty()) {
+//            stopMedia()
+            loadMedia(mp3)
+        }
+    }
+
+    private fun loadMedia(mp3: String) {
+        player.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        try {
+            player.setDataSource(mp3)
+            player.prepare()
+            player.start()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun stopMedia() {
+        if (player.isPlaying) {
+            player.stop()
+            player.reset()
+        }
     }
 }
 
