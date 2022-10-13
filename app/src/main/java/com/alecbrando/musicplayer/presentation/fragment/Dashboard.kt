@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.alecbrando.musicplayer.R
 import com.alecbrando.musicplayer.databinding.FragmentDashboardBinding
 import com.alecbrando.musicplayer.databinding.SongBinding
 import com.alecbrando.musicplayer.domain.models.SongX
@@ -31,15 +32,17 @@ class Dashboard : Fragment() {
     private val binding: FragmentDashboardBinding get() = _binding!!
     private val viewModel by viewModels<DashboardViewModel>()
     private val topViewModel by viewModels<TopRecyclerViewModel>()
+    // DashboardAdapter(::playSong. viewModel::setCurrentSong)
     private val dashboardAdapter by lazy { DashboardAdapter(::playSong) }
-    private val topRecyclerViewAdapter by lazy{TopRecyclerViewAdapter(::playSong)}
+    private val topRecyclerViewAdapter by lazy { TopRecyclerViewAdapter(::playSong) }
     private val player = MediaPlayer()
-    private lateinit var songList : List<SongX>
+    private lateinit var songList: List<SongX>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = FragmentDashboardBinding.inflate(inflater, container, false).also { _binding = it }.root
+    ): View =
+        FragmentDashboardBinding.inflate(inflater, container, false).also { _binding = it }.root
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,28 +51,29 @@ class Dashboard : Fragment() {
     }
 
     private fun initViews() = with(binding) {
-        lifecycleScope.launch{
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.Songs.collectLatest { songList ->
                     when (songList) {
                         is Resource.Error -> songList.message
                         is Resource.Loading -> Log.d("Loading", "IM LOADING")
                         is Resource.Success ->
-                            recyclerViewbottom.adapter = dashboardAdapter.apply{
+                            recyclerViewbottom.adapter = dashboardAdapter.apply {
                                 addSongs(songList.data.songs)
                             }
                     }
                 }
+                // set up current song state flow collect and populate song title and other shit
             }
         }
-        lifecycleScope.launch{
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 topViewModel.artist.collectLatest { songList ->
                     when (songList) {
                         is Resource.Error -> songList.message
                         is Resource.Loading -> Log.d("Loading", "IM LOADING")
                         is Resource.Success ->
-                            recyclerviewTop.adapter = topRecyclerViewAdapter.apply{
+                            recyclerviewTop.adapter = topRecyclerViewAdapter.apply {
                                 addSongs(songList.data.songs)
                             }
                     }
@@ -78,11 +82,9 @@ class Dashboard : Fragment() {
         }
     }
 
-    private fun playSong(mp3: String? = null, song: List<SongX>? = null)=with(binding){
-//        if(!mp3.isNullOrEmpty()){
-//
-//        }
-        btnPlay.setOnClickListener {
+    private fun playSong(mp3: String? = null, song: List<SongX>? = null ) = with(binding) {
+        if(!mp3.isNullOrEmpty()){
+
             player.setAudioStreamType(AudioManager.STREAM_MUSIC)
             try {
                 player.setDataSource(mp3)
@@ -93,10 +95,19 @@ class Dashboard : Fragment() {
             }
             Log.d("Music", "It's playing")
 
+        }
 
+        btnPause.setOnClickListener{
+            if(player.isPlaying) {
+                player.pause()
+                btnPause.setBackgroundResource(R.drawable.ic_action_name)
+            }
+            else{
+                player.start()
+                btnPause.setBackgroundResource(R.drawable.ic_pause)
 
-
-
+            }
+        }
 
 
     }

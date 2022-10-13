@@ -22,6 +22,10 @@ class DashboardViewModel @Inject constructor(private val repo : RepositoryImpl):
     private val _Song: MutableStateFlow<Resource<SongList>> = MutableStateFlow(Resource.Loading)
     val Songs = _Song.asStateFlow()
 
+    // current song = mutable state flow (private setter, public getter)
+
+    // fun (Song) to set current song
+
     init {
         getSongList()
     }
