@@ -18,6 +18,9 @@ class GridViewModel @Inject constructor(private val repo: RepositoryImpl) : View
     val songList = _songList.asStateFlow()
 
     init {
-        viewModelScope.launch { _songList.value = repo.getGenre("reggae") }
+        getGenre("reggae")
+    }
+    fun getGenre(genre:String) = viewModelScope.launch {
+        _songList.value = repo.getGenre(genre)
     }
 }
