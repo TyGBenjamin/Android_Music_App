@@ -4,12 +4,12 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import android.view.Gravity.apply
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -24,6 +24,7 @@ import com.alecbrando.musicplayer.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.text.FieldPosition
 
 
 @AndroidEntryPoint
@@ -48,6 +49,32 @@ class Dashboard : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        setUpMenu()
+    }
+    private fun setUpMenu() {
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
+            override fun onPrepareMenu(menu: Menu) {
+                // Handle for example visibility of menu items
+            }
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Add menu items here
+                menuInflater.inflate(R.menu.menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                when (menuItem.itemId) {
+                    R.id.Metal ->{}
+                    R.id.hip_hop ->{}
+                    R.id.country->{}
+                    R.id.edm ->{}
+                    R.id.Random ->{}
+                    R.id.Reggae ->{}
+                    R.id.jazz ->{}
+                    R.id.synthWave ->{}
+                }
+                return true
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun initViews() = with(binding) {
@@ -84,7 +111,7 @@ class Dashboard : Fragment() {
 
     private fun playSong(mp3: String? = null, song: List<SongX>? = null ) = with(binding) {
         if(!mp3.isNullOrEmpty()){
-
+            playerbar.visibility = View.VISIBLE
             player.setAudioStreamType(AudioManager.STREAM_MUSIC)
             try {
                 player.setDataSource(mp3)
@@ -96,19 +123,24 @@ class Dashboard : Fragment() {
             Log.d("Music", "It's playing")
 
         }
+        btnPlay.setOnClickListener{
+            player.start()
+            btnPause.visibility = View.VISIBLE
+        }
 
         btnPause.setOnClickListener{
             if(player.isPlaying) {
                 player.pause()
-                btnPause.setBackgroundResource(R.drawable.ic_action_name)
-            }
-            else{
-                player.start()
-                btnPause.setBackgroundResource(R.drawable.ic_pause)
-
+                btnPause.visibility = View.GONE
             }
         }
 
-
+        btnStop.setOnClickListener{
+            if(player.isPlaying){
+                player.stop()
+                player.reset()
+                playerbar.visibility = View.GONE
+            }
+        }
     }
 }
