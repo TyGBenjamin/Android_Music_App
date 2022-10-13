@@ -20,6 +20,8 @@ import com.alecbrando.musicplayer.presentation.viewmodels.DashboardViewModel
 import com.alecbrando.musicplayer.presentation.viewmodels.DashboardViewModelBottom
 import com.alecbrando.musicplayer.resources.Resource
 import com.alecbrando.musicplayer.utils.collectLatestLifecycleFlow
+import com.alecbrando.musicplayer.utils.pauseMusic
+import com.alecbrando.musicplayer.utils.playMusic
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,8 +30,8 @@ class DashboardFragment : Fragment() {
     private val binding: FragmentDashboardBinding get() = _binding!!
     private val viewModel by viewModels<DashboardViewModel>()
     private val viewModelBottom by viewModels<DashboardViewModelBottom>()
-    private val dashboardAdapter by lazy { DashboardAdapter(::playSong) }
-    private val dashboardAdapterBottom by lazy { DashboardAdapterBottom(::playSong) }
+    private val dashboardAdapter by lazy { DashboardAdapter(::pauseMusicOrFastForward) }
+    private val dashboardAdapterBottom by lazy { DashboardAdapterBottom(::pauseMusicOrFastForward) }
     private var songsList : List<Songs>? = null
     private var songIndex : Int = 0
     private var mediaPlayer = MediaPlayer()
@@ -79,10 +81,10 @@ class DashboardFragment : Fragment() {
             searchMenu()
         }
         btnForward.setOnClickListener {
-            playSong()
+            pauseMusicOrFastForward()
         }
         btnPlay.setOnClickListener {
-            pauseSong()
+            pauseMusic(binding)
         }
     }
 
@@ -129,62 +131,8 @@ class DashboardFragment : Fragment() {
         popup.show()
     }
 
-    private fun playSong(mp3: String? = null, songs: MutableList<Songs>? = null) = with(binding){
-        if(mediaPlayer.isPlaying){
-            mediaPlayer.stop()
-            mediaPlayer.reset()
-            mediaPlayer.release()
-        }
-        mediaPlayer = MediaPlayer()
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
-
-        if(!mp3.isNullOrEmpty()){
-            songsList = songs
-            for(i in songsList!!.indices){
-                if(songs?.get(i)?.mp3 == mp3){
-                    songIndex = i
-                }
-            }
-            try{
-                llMediaPlayer.visibility = View.VISIBLE
-                btnPlay.setBackgroundResource(R.drawable.ic_baseline_pause_circle_outline_24)
-                mediaPlayerImage.load((songsList as MutableList<Songs>).get(songIndex).albumPicture)
-                mediaPlayerName.text = (songsList as MutableList<Songs>).get(songIndex).name
-                mediaPlayer.setDataSource((songsList as MutableList<Songs>).get(songIndex).mp3)
-                mediaPlayer.prepare()
-                mediaPlayer.start()
-            } catch(e: Exception){
-                e.message
-            }
-        } else{
-            if (songIndex < songsList!!.size-1){
-                try{
-                    llMediaPlayer.visibility = View.VISIBLE
-                    mediaPlayerImage.load((songsList as MutableList<Songs>).get(songIndex+1).albumPicture)
-                    mediaPlayerName.text = (songsList as MutableList<Songs>).get(songIndex+1).name
-                    mediaPlayer.setDataSource((songsList as MutableList<Songs>).get(songIndex+1).mp3)
-                    mediaPlayer.prepare()
-                    mediaPlayer.start()
-                    songIndex++
-                } catch(e: Exception){
-                    e.message
-                }
-            } else{
-                val toast : Toast = Toast.makeText(context, "You are at the end of the list...", Toast.LENGTH_LONG)
-                toast.show()
-            }
-        }
+    private fun pauseMusicOrFastForward(mp3: String? = null, songs: MutableList<Songs>? = null) = with(binding){
+        playMusic(mp3, songs, binding)
     }
 
-    private fun pauseSong() = with(binding){
-        var length = mediaPlayer.currentPosition
-        if(mediaPlayer.isPlaying){
-            mediaPlayer.pause()
-            btnPlay.setBackgroundResource(R.drawable.ic_baseline_play_circle_24)
-        } else{
-            mediaPlayer.seekTo(length)
-            mediaPlayer.start()
-            btnPlay.setBackgroundResource(R.drawable.ic_baseline_pause_circle_outline_24)
-        }
-    }
 }

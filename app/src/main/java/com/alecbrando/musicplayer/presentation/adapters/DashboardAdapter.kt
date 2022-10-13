@@ -16,7 +16,7 @@ import com.alecbrando.musicplayer.domains.models.Songs
 import com.alecbrando.musicplayer.presentation.fragments.DashboardFragment
 
 class DashboardAdapter(
-    private val playSong:(mp3: String, songs: MutableList<Songs>) -> Unit
+    private val pauseMusicOrFastForward:(mp3: String, songs: MutableList<Songs>) -> Unit
 ) : RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder>() {
     private var songs: MutableList<Songs> = mutableListOf()
 
@@ -27,7 +27,7 @@ class DashboardAdapter(
             ivSong.load(song.albumPicture)
             tvSongTitle.text = song.name
             root.setOnClickListener{
-                playSong(song.mp3, songs)
+                pauseMusicOrFastForward(song.mp3, songs)
             }
         }
     }
