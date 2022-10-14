@@ -1,10 +1,7 @@
 package com.alecbrando.musicplayer
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.alecbrando.musicplayer.domain.datastore.DataStorePrefSource
 import com.alecbrando.musicplayer.presentation.screens.onboarding.ViewPagerDirections

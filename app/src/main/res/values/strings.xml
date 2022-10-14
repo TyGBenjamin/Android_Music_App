@@ -5,4 +5,11 @@
     <string name="first_fragment_text">Hello Welcome To the music app where you can listet to, downalaod and enjoy some of your favorite songs all in one place!</string>
     <string name="albumimage">albumImage</string>
     <string name="filter">Filter</string>
+    <string name="metal">Metal</string>
+    <string name="reggae">Reggae</string>
+    <string name="synthwave">Synthwave</string>
+    <string name="edm">EDM</string>
+    <string name="random">Random</string>
+    <string name="jazz">Jazz</string>
+    <string name="hip_hop">Hip Hop</string>
 </resources>

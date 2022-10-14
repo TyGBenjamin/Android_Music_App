@@ -3,37 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/hip_hop"
-        android:title="Hip Hop"
+        android:title="@string/hip_hop"
         android:orderInCategory="2"
         app:showAsAction="never" />
 
     <item android:id="@+id/jazz"
-        android:title="Jazz"
+        android:title="@string/jazz"
         android:orderInCategory="2"
         app:showAsAction="never" />
 
     <item android:id="@+id/Random"
-        android:title="Random"
+        android:title="@string/random"
         android:orderInCategory="2"
         app:showAsAction="never" />
 
     <item android:id="@+id/edm"
-        android:title="EDM"
+        android:title="@string/edm"
         android:orderInCategory="2"
         app:showAsAction="never" />
 
     <item android:id="@+id/synthWave"
-        android:title="Synthwave"
+        android:title="@string/synthwave"
         android:orderInCategory="2"
         app:showAsAction="never" />
 
     <item android:id="@+id/Metal"
-        android:title="Metal"
+        android:title="@string/metal"
         android:orderInCategory="2"
         app:showAsAction="never" />
 
     <item android:id="@+id/Reggae"
-        android:title="Reggae"
+        android:title="@string/reggae"
         android:orderInCategory="2"
         app:showAsAction="never" />
 

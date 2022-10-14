@@ -45,6 +45,4 @@ class ThirdOnboard : Fragment() {
         val action = ViewPagerDirections.actionViewPager2ToDashboardFragment()
         findNavController().navigate(action)
     }
-
-
 }
