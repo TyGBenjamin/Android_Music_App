@@ -9,7 +9,7 @@ import com.alecbrando.musicplayer.databinding.SingleImageBinding
 import com.alecbrando.musicplayer.domain.model.Song
 
 class GridViewAdapter(
-    private val playSong :(mp3: String, songs: List<Song>, position:Int)-> Unit)
+    private val playSong :(song: Song, songs: List<Song>, position:Int)-> Unit)
     : RecyclerView.Adapter<GridViewAdapter.GridViewHolder>() {
     private var songList: List<Song> = mutableListOf()
 
@@ -22,7 +22,7 @@ class GridViewAdapter(
             tvTitle.text = song.artist
 
             root.setOnClickListener{
-                playSong(song.mp3, songList, 0)
+                playSong(song, songList, 0)
 //                binding2?.artistiPlaying?.text = song.artist
 //                binding2?.songPlaying?.text = song.name
 //                binding2?.albumPlayer?.load(song.albumPicture)
