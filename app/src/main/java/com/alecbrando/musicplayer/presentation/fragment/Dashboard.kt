@@ -1,5 +1,6 @@
 package com.alecbrando.musicplayer.presentation.fragment
 
+import android.annotation.SuppressLint
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -14,9 +15,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import coil.load
 import com.alecbrando.musicplayer.R
 import com.alecbrando.musicplayer.databinding.FragmentDashboardBinding
 import com.alecbrando.musicplayer.databinding.SongBinding
+import com.alecbrando.musicplayer.domain.models.Song
 import com.alecbrando.musicplayer.domain.models.SongX
 import com.alecbrando.musicplayer.presentation.adapter.DashboardAdapter
 import com.alecbrando.musicplayer.presentation.adapter.TopRecyclerViewAdapter
@@ -36,8 +39,9 @@ class Dashboard : Fragment() {
     // DashboardAdapter(::playSong. viewModel::setCurrentSong)
     private val dashboardAdapter by lazy { DashboardAdapter(::playSong) }
     private val topRecyclerViewAdapter by lazy { TopRecyclerViewAdapter(::playSong) }
-    private val player = MediaPlayer()
-    private lateinit var songList: List<SongX>
+        private val player = MediaPlayer()
+    private var songList: List<SongX>? = null
+    private var songIndex : Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +54,7 @@ class Dashboard : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         setUpMenu()
+        initListeners()
     }
     private fun setUpMenu() {
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
@@ -109,22 +114,10 @@ class Dashboard : Fragment() {
         }
     }
 
-    private fun playSong(mp3: String? = null, song: List<SongX>? = null ) = with(binding) {
-        if(!mp3.isNullOrEmpty()){
-            playerbar.visibility = View.VISIBLE
-            player.setAudioStreamType(AudioManager.STREAM_MUSIC)
-            try {
-                player.setDataSource(mp3)
-                player.prepare()
-                player.start()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            Log.d("Music", "It's playing")
-
-        }
+    private fun initListeners() = with(binding){
         btnPlay.setOnClickListener{
             player.start()
+            btnPlay.visibility = View.GONE
             btnPause.visibility = View.VISIBLE
         }
 
@@ -132,6 +125,7 @@ class Dashboard : Fragment() {
             if(player.isPlaying) {
                 player.pause()
                 btnPause.visibility = View.GONE
+                btnPlay.visibility = View.VISIBLE
             }
         }
 
@@ -141,6 +135,92 @@ class Dashboard : Fragment() {
                 player.reset()
                 playerbar.visibility = View.GONE
             }
+        }
+    }
+
+
+
+
+    private fun playSong(songDeets:SongX, mp3: String? = null, song: List<SongX>? = null ) = with(binding) {
+
+        stopMedia()
+        if(!mp3.isNullOrEmpty()){
+            songList = song
+            for(i in songList!!.indices){
+                println(songList!!.indices.toString() + "Over Here")
+                if(songList?.get(i)?.mp3 == mp3){
+                    songIndex = i
+                    println( "${songIndex} ")
+                    btnNext.setOnClickListener{
+                        if(songIndex >= 9){
+                           songIndex = 0
+                            songIndex = songIndex
+                            songPlaying.text = song?.get(songIndex)?.name
+                            artistPlaying.text = song?.get(songIndex)?.artist
+                            imagePlaying.load(song?.get(songIndex)?.albumPicture)
+
+                            println("$songIndex new index")
+                            val nextSong: String? = song?.get(songIndex)?.mp3
+
+                            if (nextSong != null) {
+                                nextMedia(nextSong)
+                            }
+                        }
+
+                        else {
+                            songIndex = songIndex + 1
+                            println("$songIndex new index")
+                            songPlaying.text = song?.get(songIndex)?.name
+                            artistPlaying.text = song?.get(songIndex)?.artist
+                            imagePlaying.load(song?.get(songIndex)?.albumPicture)
+                            val nextSong: String? = song?.get(songIndex)?.mp3
+
+
+                            if (nextSong != null) {
+                                nextMedia(nextSong)
+                            }
+                        }
+
+                    }
+
+                }
+
+
+
+
+            }
+            playerbar.visibility = View.VISIBLE
+            songPlaying.text = songDeets.name
+            artistPlaying.text = songDeets.artist
+            imagePlaying.load(songDeets.albumPicture)
+//            player.setAudioStreamType(AudioManager.STREAM_MUSIC)
+            try {
+                player.setDataSource(mp3)
+                player.prepare()
+                player.start()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            Log.d("Music", "It's playing${songDeets.name}")
+
+        }
+    }
+
+    fun nextMedia(mp3:String){
+        if(player.isPlaying) {
+            player.stop()
+            player.reset()
+            player.setDataSource(mp3)
+            player.prepare()
+            player.start()
+        }
+
+    }
+
+    private fun stopMedia() {
+        if(player.isPlaying) {
+            player.stop()
+            player.reset()
         }
     }
 }

@@ -12,14 +12,14 @@ import com.alecbrando.musicplayer.domain.models.Song
 import com.alecbrando.musicplayer.domain.models.SongX
 
 class TopRecyclerViewAdapter(
-    private val playSong:(mp3: String, songs: List<SongX>) -> Unit
+    private val playSong:(songDeets: SongX,mp3: String, songs: List<SongX>) -> Unit
 ): RecyclerView.Adapter<TopRecyclerViewAdapter.TopViewHolder>() {
     private lateinit var genre: List<SongX>
 //    private lateinit var songs: List<SongX>
 
     inner class TopViewHolder(
         private val binding: ArtistBinding,
-        private var binding2: FragmentDashboardBinding?
+
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun apply(song: SongX) = with(binding) {
@@ -29,10 +29,7 @@ class TopRecyclerViewAdapter(
 
             root.setOnClickListener{
                 println("Song Clicked ${song.name}")
-                playSong(song.mp3, genre)
-                binding2?.songPlaying?.text = song.name
-                binding2?.artistPlaying?.text = song.artist
-                binding2?.imagePlaying?.load(song.albumPicture)
+                playSong(song, song.mp3, genre)
 
             }
         }
@@ -41,7 +38,7 @@ class TopRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             TopViewHolder{
         val binding = ArtistBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TopViewHolder(binding,null)
+        return TopViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: TopViewHolder, position: Int)   {

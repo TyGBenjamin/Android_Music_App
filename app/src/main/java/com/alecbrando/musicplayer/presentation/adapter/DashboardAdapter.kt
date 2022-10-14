@@ -13,14 +13,12 @@ import com.alecbrando.musicplayer.domain.models.SongX
 
 
 class DashboardAdapter(
-    private val playSong:(mp3: String, songs: List<SongX>) -> Unit,
-    // cb function to set current song (Song) -> Unit
+    private val playSong:(songDeets:SongX,mp3: String, songs: List<SongX>) -> Unit,
 ):RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder>() {
     private lateinit var songs: List<SongX>
 
     inner class DashboardViewHolder(
         private val binding: SongBinding,
-        private var binding2: FragmentDashboardBinding?
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun apply(song: SongX) = with(binding) {
@@ -33,11 +31,8 @@ class DashboardAdapter(
 
             root.setOnClickListener{
                 println("Song Clicked ${song.name}")
-                // call cb function to set current song
-                playSong(song.mp3, songs)
-                binding2?.songPlaying?.text = song.name
-                binding2?.artistPlaying?.text = song.artist
-                binding2?.imagePlaying?.load(song.albumPicture)
+
+                playSong(song,song.mp3, songs)
 
             }
 
@@ -52,7 +47,7 @@ class DashboardAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
     DashboardViewHolder{
         val binding = SongBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return DashboardViewHolder(binding,null)
+        return DashboardViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: DashboardViewHolder, position: Int)   {
