@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.alecbrando.musicplayer.databinding.FragmentDashboardBinding
 import com.alecbrando.musicplayer.databinding.SingleImageBinding
-import com.alecbrando.musicplayer.domain.model.Song
+import com.alecbrando.musicplayer.data.model.Song
 
 class GridViewAdapter(
     private val playSong :(song: Song, songs: List<Song>, position:Int)-> Unit)

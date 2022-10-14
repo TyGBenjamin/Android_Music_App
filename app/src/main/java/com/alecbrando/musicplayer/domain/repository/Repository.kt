@@ -1,6 +1,6 @@
 package com.alecbrando.musicplayer.domain.repository
 
-import com.alecbrando.musicplayer.domain.model.SongList
+import com.alecbrando.musicplayer.data.model.SongList
 import com.alecbrando.musicplayer.util.Resource
 
 interface Repository {

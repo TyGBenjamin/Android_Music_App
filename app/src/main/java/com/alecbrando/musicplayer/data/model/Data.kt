@@ -1,4 +1,4 @@
-package com.alecbrando.musicplayer.domain.model
+package com.alecbrando.musicplayer.data.model
 
 data class Data(
     val success: Boolean,

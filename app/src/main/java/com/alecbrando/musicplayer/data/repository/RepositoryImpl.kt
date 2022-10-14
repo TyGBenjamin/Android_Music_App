@@ -1,7 +1,7 @@
 package com.alecbrando.musicplayer.data.repository
 
 import com.alecbrando.musicplayer.data.remote.ApiService
-import com.alecbrando.musicplayer.domain.model.SongList
+import com.alecbrando.musicplayer.data.model.SongList
 import com.alecbrando.musicplayer.domain.repository.Repository
 import com.alecbrando.musicplayer.util.Resource
 import kotlinx.coroutines.Dispatchers

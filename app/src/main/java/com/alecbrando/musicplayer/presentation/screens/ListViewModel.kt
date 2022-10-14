@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alecbrando.musicplayer.data.repository.RepositoryImpl
-import com.alecbrando.musicplayer.domain.model.SongList
+import com.alecbrando.musicplayer.data.model.SongList
 import com.alecbrando.musicplayer.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

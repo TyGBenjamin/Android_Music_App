@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.alecbrando.musicplayer.databinding.FragmentDashboardBinding
 import com.alecbrando.musicplayer.databinding.SingleSongBinding
-import com.alecbrando.musicplayer.domain.model.Song
+import com.alecbrando.musicplayer.data.model.Song
 
 class ListViewAdapter(
     private val playSong :(song: Song, songs: List<Song>, position: Int)-> Unit
@@ -34,6 +34,9 @@ class ListViewAdapter(
 //                binding2?.songPlaying?.text = song.name
 //                binding2?.albumPlayer?.load(song.albumPicture)
 
+            }
+            btnDownload.setOnClickListener{
+                println("download button for ${song}clicked")
             }
         }
 

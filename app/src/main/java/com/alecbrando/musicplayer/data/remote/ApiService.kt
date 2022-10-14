@@ -1,6 +1,6 @@
 package com.alecbrando.musicplayer.data.remote
 
-import com.alecbrando.musicplayer.domain.model.SongList
+import com.alecbrando.musicplayer.data.model.SongList
 import com.alecbrando.musicplayer.util.Constants.BASE_URL
 import retrofit2.Response
 import retrofit2.Retrofit
