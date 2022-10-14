@@ -1,12 +1,13 @@
 package com.alecbrando.musicplayer.data.service
 
 import com.alecbrando.musicplayer.domains.models.SongsWrapper
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("/music/songs")
+    @GET("music/songs")
     suspend fun getAllSongs() : Response<SongsWrapper>
 
     @GET("music/genre")

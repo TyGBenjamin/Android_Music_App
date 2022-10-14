@@ -1,22 +1,15 @@
 package com.alecbrando.musicplayer.presentation.adapters
 
-import android.content.ContentValues.TAG
-import android.media.AudioManager
-import android.media.Image
-import android.media.MediaPlayer
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.alecbrando.musicplayer.R
 import com.alecbrando.musicplayer.databinding.DashboardRecyclerViewBinding
 import com.alecbrando.musicplayer.domains.models.Songs
-import com.alecbrando.musicplayer.presentation.fragments.DashboardFragment
 
 class DashboardAdapter(
-    private val pauseMusicOrFastForward:(mp3: String, songs: MutableList<Songs>) -> Unit
+    private val playOrPauseSong:(mp3: String, songs: MutableList<Songs>) -> Unit
 ) : RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder>() {
     private var songs: MutableList<Songs> = mutableListOf()
 
@@ -27,7 +20,7 @@ class DashboardAdapter(
             ivSong.load(song.albumPicture)
             tvSongTitle.text = song.name
             root.setOnClickListener{
-                pauseMusicOrFastForward(song.mp3, songs)
+                playOrPauseSong(song.mp3, songs)
             }
         }
     }

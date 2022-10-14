@@ -152,6 +152,13 @@
                 android:layout_height="match_parent"/>
 
             <Button
+                android:id="@+id/btn_stop"
+                android:background="@drawable/ic_outline_stop_circle_24"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                />
+
+            <Button
                 android:id="@+id/btn_play"
                 android:background="@drawable/ic_baseline_play_circle_24"
                 android:layout_width="45dp"

@@ -12,19 +12,19 @@ import com.alecbrando.musicplayer.domains.models.Songs
 
 private var songsList : List<Songs>? = null
 private var songIndex : Int = 0
-private var mediaPlayer = MediaPlayer()
 
-fun Fragment.playMusic(
+fun Fragment.playOrPause(
     mp3: String? = null,
     songs: MutableList<Songs>? = null,
+    mediaPlayer: MediaPlayer,
     binding: FragmentDashboardBinding
 ) {
     if(mediaPlayer.isPlaying){
         mediaPlayer.stop()
         mediaPlayer.reset()
-        mediaPlayer.release()
+//        mediaPlayer.release()
     }
-    mediaPlayer = MediaPlayer()
+//    mediaPlayer = MediaPlayer()
     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
 
     if(!mp3.isNullOrEmpty()){
@@ -45,7 +45,8 @@ fun Fragment.playMusic(
         } catch(e: Exception){
             e.message
         }
-    } else{
+    }
+    else{
         if (songIndex < songsList!!.size-1){
             try{
                 binding.llMediaPlayer.visibility = View.VISIBLE

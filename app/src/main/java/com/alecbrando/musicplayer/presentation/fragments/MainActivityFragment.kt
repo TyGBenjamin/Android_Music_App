@@ -1,11 +1,14 @@
 package com.alecbrando.musicplayer.presentation.fragments
 
+import android.Manifest
 import android.content.ContentValues.TAG
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -60,5 +63,4 @@ class MainActivityFragment: Fragment() {
             }
         }
     }
-
 }

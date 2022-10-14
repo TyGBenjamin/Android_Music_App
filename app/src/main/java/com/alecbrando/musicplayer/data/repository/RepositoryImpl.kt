@@ -38,5 +38,4 @@ class RepositoryImpl @Inject constructor(
             Resource.Error(e.message.toString())
         }
     }
-
 }
