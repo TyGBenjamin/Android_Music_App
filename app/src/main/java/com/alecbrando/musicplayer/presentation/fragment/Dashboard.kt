@@ -147,14 +147,16 @@ class Dashboard : Fragment() {
         if(!mp3.isNullOrEmpty()){
             songList = song
             for(i in songList!!.indices){
+
                 println(songList!!.indices.toString() + "Over Here")
+
                 if(songList?.get(i)?.mp3 == mp3){
                     songIndex = i
                     println( "${songIndex} ")
                     btnNext.setOnClickListener{
                         if(songIndex >= 9){
                            songIndex = 0
-                            songIndex = songIndex
+
                             songPlaying.text = song?.get(songIndex)?.name
                             artistPlaying.text = song?.get(songIndex)?.artist
                             imagePlaying.load(song?.get(songIndex)?.albumPicture)
