@@ -14,7 +14,7 @@ data class SongX(
     @ColumnInfo
     val genre: String,
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo
     val id: Int,
 

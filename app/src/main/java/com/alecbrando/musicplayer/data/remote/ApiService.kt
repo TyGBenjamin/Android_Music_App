@@ -19,5 +19,4 @@ interface ApiService {
     suspend fun getGenres(@Query("search") genre: String) : Response<SongList>
 
 
-
 }

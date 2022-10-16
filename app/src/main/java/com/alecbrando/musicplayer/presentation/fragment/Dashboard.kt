@@ -135,6 +135,11 @@ class Dashboard : Fragment() {
                 player.reset()
                 playerbar.visibility = View.GONE
             }
+            if(!player.isPlaying){
+                player.stop()
+                player.reset()
+                playerbar.visibility = View.GONE
+            }
         }
     }
 
@@ -149,7 +154,6 @@ class Dashboard : Fragment() {
             for(i in songList!!.indices){
 
                 println(songList!!.indices.toString() + "Over Here")
-
                 if(songList?.get(i)?.mp3 == mp3){
                     songIndex = i
                     println( "${songIndex} ")
