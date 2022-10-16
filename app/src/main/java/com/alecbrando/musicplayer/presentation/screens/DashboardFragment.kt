@@ -17,7 +17,7 @@ import com.alecbrando.musicplayer.R
 import com.alecbrando.musicplayer.adapters.GridViewAdapter
 import com.alecbrando.musicplayer.adapters.ListViewAdapter
 import com.alecbrando.musicplayer.databinding.FragmentDashboardBinding
-import com.alecbrando.musicplayer.domain.model.Song
+import com.alecbrando.musicplayer.data.model.Song
 import com.alecbrando.musicplayer.util.Constants.TAG
 import com.alecbrando.musicplayer.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,7 +35,8 @@ class DashboardFragment : Fragment() {
     private val gridViewAdapter by lazy { GridViewAdapter(::playSong) }
     private val listViewAdapter by lazy { ListViewAdapter(::playSong) }
     private val player = MediaPlayer()
-    private lateinit var songList: List<Song>
+    private var songList: List<Song>? = null
+    private var songIndex: Int = 0
 
 
     override fun onCreateView(
@@ -90,9 +91,10 @@ class DashboardFragment : Fragment() {
             stopMedia()
             navBarView.visibility = View.GONE
         }
-        btnNext.setOnClickListener{
+//        btnNext.setOnClickListener{
+//
+//        }
 
-        }
     }
 
     private fun initViews() = with(binding) {
@@ -134,15 +136,49 @@ class DashboardFragment : Fragment() {
 
     }
 
-    private fun playSong(song: Song, songlist: List<Song>? = null, position: Int) = with(binding) {
+    private fun playSong(song: Song, listSong: List<Song>? = null, position: Int) = with(binding) {
         stopMedia()
         if(song.mp3.isNotEmpty()) {
 //            stopMedia()
+            songList = listSong
+            for ( i in songList!!.indices){
+                println(songList!!.indices.toString() + "TESTING")
+                if (songList?.get(i)?.mp3 == song.mp3){
+                    songIndex = i
+                    println("$i")
+                    btnNext.setOnClickListener{
+                        if(songIndex>=9){
+                            songIndex = 0
+                            songPlaying.text = listSong?.get(songIndex)?.name
+                            artistiPlaying.text = listSong?.get(songIndex)?.artist
+                            albumPlayer.load(listSong?.get(songIndex)?.albumPicture)
+                            println ("$songIndex")
+                            val nextSong: String? = listSong?.get(songIndex)?.mp3
+                            if (nextSong != null){
+                                nextMedia(nextSong)
+                            }
+                        } else {
+                            songIndex = songIndex +1
+                            println( "$songIndex + is now")
+                            songPlaying.text = listSong?.get(songIndex)?.name
+                            artistiPlaying.text = listSong?.get(songIndex)?.artist
+                            albumPlayer.load(listSong?.get(songIndex)?.albumPicture)
+                            println ("$songIndex")
+                            val nextSong: String? = listSong?.get(songIndex)?.mp3
+                            if (nextSong != null){
+                                nextMedia(nextSong)
+                            }
+                        }
+                    }
+                }
+            }
+
             navBarView.visibility = View.VISIBLE
             artistiPlaying.text = song.artist
             songPlaying.text = song.name
             albumPlayer.load(song.albumPicture)
             loadMedia(song.mp3)
+
         }
     }
 
@@ -157,13 +193,26 @@ class DashboardFragment : Fragment() {
         }
     }
 
+
     private fun stopMedia() {
         if (player.isPlaying) {
             player.stop()
             player.reset()
         }
     }
+
+    fun nextMedia(mp3:String){
+        if(player.isPlaying){
+            player.stop()
+            player.reset()
+            player.setDataSource(mp3)
+            player.prepare()
+            player.start()
+        }
+    }
+
 }
+
 
 /**
  * DashboardFragment
