@@ -25,10 +25,10 @@ class FileDownloadWorker(
     override suspend fun doWork(): Result {
         startForegroundService()
         delay(5000L)
-        val response = FileApi.instance.downloadSong()
+        val response = FileApi.instance.downloadSong(url)
         response.body()?.let{body ->
             return withContext(Dispatchers.IO){
-                val file = File(context.cacheDir, "song.mp3")
+                val file = File(context.cacheDir, "$songName")
                 val outputStream = FileOutputStream(file)
                 outputStream.use { stream ->
                     try {
@@ -69,7 +69,7 @@ class FileDownloadWorker(
         setForeground(
             ForegroundInfo(
                 Random.nextInt(),
-                NotificationCompat.Builder(context, "download_chanel")
+                NotificationCompat.Builder(context, "download_channel")
                     .setSmallIcon(R.drawable.ic_launcher_background)
                     .setContentText("Download in progress")
                     .build()
@@ -77,5 +77,9 @@ class FileDownloadWorker(
 
             )
         )
+    }
+    companion object{
+        lateinit var url: String
+        lateinit var songName: String
     }
 }

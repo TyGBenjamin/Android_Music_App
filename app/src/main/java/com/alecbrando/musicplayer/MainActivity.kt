@@ -22,18 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val downloadRequest = OneTimeWorkRequestBuilder<FileDownloadWorker>()
-//            .setConstraints(
-//                Constraints.Builder()
-//                    .setRequiredNetworkType(
-//                        NetworkType.CONNECTED
-//                    )
-//                    .build()
-//            )
-//            .build()
-//
-//        val workManager = WorkManager.getInstance(applicationContext)
-
         setContentView(R.layout.activity_main)
+
     }
 }
