@@ -1,4 +1,4 @@
-package com.alecbrando.musicplayer.utils
+package com.alecbrando.musicplayer.utils.objects
 
 object WorkerKeys {
     const val ERROR_MSG = "errorMsg"

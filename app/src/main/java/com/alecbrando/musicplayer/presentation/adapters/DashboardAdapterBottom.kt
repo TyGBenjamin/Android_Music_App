@@ -17,10 +17,9 @@ import com.alecbrando.musicplayer.databinding.DashboardRecyclerViewBottomBinding
 import com.alecbrando.musicplayer.domains.models.Songs
 
 class DashboardAdapterBottom(
-    private val playOrPauseSong:(mp3: String, songs: MutableList<Songs>) -> Unit,
+    private val setSongInfo:(mp3: String, songs: MutableList<Songs>) -> Unit,
 ) : RecyclerView.Adapter<DashboardAdapterBottom.DashboardViewHolder>() {
     private var songs: MutableList<Songs> = mutableListOf()
-    private val mainActivity by lazy { MainActivity() }
 
     inner class DashboardViewHolder(
         private val binding: DashboardRecyclerViewBottomBinding
@@ -34,7 +33,7 @@ class DashboardAdapterBottom(
             }
             root.setOnClickListener{
                 Log.d(TAG, "displaySongs: this is song mp3 ${song.mp3} this is id,${song.id} name ${song.name}")
-                playOrPauseSong(song.mp3, songs)
+                setSongInfo(song.mp3, songs)
             }
 
         }

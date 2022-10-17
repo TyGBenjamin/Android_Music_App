@@ -1,5 +1,6 @@
 package com.alecbrando.musicplayer.data.local
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import com.alecbrando.musicplayer.data.typeconverters.TypeConvertersHelper
 import com.alecbrando.musicplayer.domains.models.Songs

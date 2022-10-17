@@ -3,7 +3,7 @@ package com.alecbrando.musicplayer.domains.datastore
 import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
-import com.alecbrando.musicplayer.utils.Constants
+import com.alecbrando.musicplayer.utils.objects.Constants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

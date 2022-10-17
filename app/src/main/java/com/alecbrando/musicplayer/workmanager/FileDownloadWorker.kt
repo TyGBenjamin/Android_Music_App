@@ -9,7 +9,7 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.alecbrando.musicplayer.R
 import com.alecbrando.musicplayer.data.service.FileApi
-import com.alecbrando.musicplayer.utils.WorkerKeys
+import com.alecbrando.musicplayer.utils.objects.WorkerKeys
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -21,7 +21,6 @@ class FileDownloadWorker(
     private val context: Context,
     private val workerParameters: WorkerParameters
 ): CoroutineWorker(context, workerParameters) {
-
     override suspend fun doWork(): Result {
         startForegroundService()
         delay(5000L)

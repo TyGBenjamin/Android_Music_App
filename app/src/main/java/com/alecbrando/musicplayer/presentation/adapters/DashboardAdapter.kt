@@ -9,7 +9,7 @@ import com.alecbrando.musicplayer.databinding.DashboardRecyclerViewBinding
 import com.alecbrando.musicplayer.domains.models.Songs
 
 class DashboardAdapter(
-    private val playOrPauseSong:(mp3: String, songs: MutableList<Songs>) -> Unit
+    private val setSongInfo:(mp3: String, songs: MutableList<Songs>) -> Unit
 ) : RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder>() {
     private var songs: MutableList<Songs> = mutableListOf()
 
@@ -20,7 +20,7 @@ class DashboardAdapter(
             ivSong.load(song.albumPicture)
             tvSongTitle.text = song.name
             root.setOnClickListener{
-                playOrPauseSong(song.mp3, songs)
+                setSongInfo(song.mp3, songs)
             }
         }
     }

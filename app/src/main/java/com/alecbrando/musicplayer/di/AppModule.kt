@@ -2,17 +2,14 @@ package com.alecbrando.musicplayer.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.alecbrando.musicplayer.data.local.SongsDao
 import com.alecbrando.musicplayer.data.local.SongsDatabase
 import com.alecbrando.musicplayer.data.repository.RepositoryImpl
 import com.alecbrando.musicplayer.data.service.ApiService
 import com.alecbrando.musicplayer.domains.datastore.DataStoreRepository
 import com.alecbrando.musicplayer.domains.datastore.DataStoreRepositoryImpl
-import com.alecbrando.musicplayer.domains.models.Songs
 import com.alecbrando.musicplayer.domains.repository.Repository
 import com.alecbrando.musicplayer.domains.usecases.GetAllSongsUseCase
-import com.alecbrando.musicplayer.utils.SongsUrl.BASE_URL
+import com.alecbrando.musicplayer.utils.objects.SongsUrl.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
