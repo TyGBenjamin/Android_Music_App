@@ -50,6 +50,8 @@ class ListViewAdapter(
 //                inflateDownloadMenu(song.mp3, song.name, binding, binding.btnDownload.id)
                 val url = song.mp3.subSequence(47, song.mp3.lastIndex+1) as String
                 DownloadWorker.url = url
+                DownloadWorker.songName = song.name
+                println(url)
                 oneTimeWorkRequest(binding)
 
             }
