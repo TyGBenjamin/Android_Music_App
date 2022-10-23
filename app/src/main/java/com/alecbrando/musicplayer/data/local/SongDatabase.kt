@@ -7,6 +7,6 @@ import com.alecbrando.musicplayer.domain.models.SongX
 
 @Database(entities = [SongX::class], version = 1 )
 @TypeConverters(DatabaseConverter::class)
-abstract class SongDatabase : RoomDatabase() {
+abstract class SongDatabase:RoomDatabase()  {
     abstract fun songDao() : SongDao
 }

@@ -6,11 +6,11 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Url
+
 
 interface FileApi {
-    @GET("{url}")
 
+    @GET("{url}")
     suspend fun downloadSong(@Path("url") url: String): Response<ResponseBody>
 
     companion object{
