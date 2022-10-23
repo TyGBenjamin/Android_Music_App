@@ -9,4 +9,5 @@ import com.alecbrando.musicplayer.domain.models.SongX
 @TypeConverters(DatabaseConverter::class)
 abstract class SongDatabase:RoomDatabase()  {
     abstract fun songDao() : SongDao
+
 }
